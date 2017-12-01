@@ -2,10 +2,8 @@ import click
 import requests
 
 from PIL import Image
-try:
-    from StringIO import StringIO
-except:
-    from io import BytesIO, StringIO
+
+from StringIO import StringIO
 
 @click.command()
 @click.option('--as-cowboy', '-c', is_flag=True, help='Greet as a cowboy.')
@@ -19,7 +17,7 @@ def main(name, as_cowboy):
 	api=r.json()
 	posters=api['posters']
 	for poster in posters:
-		url='http://image.tmdb.org/t/p/w420{}'.format(poster['file_path'])			
+		url='http://image.tmdb.org/t/p/w1000{}'.format(poster['file_path'])			
 	req=requests.get(url)
 	img=Image.open(StringIO(req.content))
 	img.show()
